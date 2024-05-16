@@ -1,0 +1,26 @@
+package com.ll.dortdeveloping2.springbootdeveloper.controller;
+
+import com.ll.dortdeveloping2.springbootdeveloper.domain.Article;
+import com.ll.dortdeveloping2.springbootdeveloper.dto.AddArticleRequest;
+import com.ll.dortdeveloping2.springbootdeveloper.service.BlogService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RequiredArgsConstructor
+@RestController
+public class BlogApiController {
+
+    private final BlogService blogService;
+
+    @PostMapping("/api/articles")
+    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request){
+        Article savedArticle = blogService.save(request);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(savedArticle);
+    }
+}
