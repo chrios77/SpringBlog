@@ -21,7 +21,9 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -77,7 +79,32 @@ class BlogApiControllerTest {
 
     }
 
-    @DisplayName("deleteArticle: 블로그 글 삭제에 성곤한다.")
+    @DisplayName("findAllArticles: 블로그 글 목록 조회에 성공한다.")
+    @Test
+    public void findAllArticles() throws Exception{
+
+        // given
+        final String url = "/api/articles";
+        final String title = "title";
+        final String content = "content";
+
+        blogRepository.save(Article.builder()
+                .title(title)
+                .content(content)
+                .build());
+      
+      // when
+        final ResultActions resultActions = mockMvc.perform(get(url)
+                .accept(MediaType.APPLICATION_JSON));
+
+        // then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].content").value(content))
+                .andExpect(jsonPath("$[0].title").value(title));
+    }
+
+    @DisplayName("deleteArticle: 블로그 글 삭제에 성한다.")
     @Test
     public void deleteArticle() throws Exception{
 
@@ -87,10 +114,7 @@ class BlogApiControllerTest {
         final String content = "content";
 
         Article savedArticle = blogRepository.save(Article.builder()
-                .title(title)
-                .content(content)
-                .build());
-
+                                                   
         // when
         mockMvc.perform(delete(url, savedArticle.getId()))
                 .andExpect(status().isOk());
@@ -99,7 +123,7 @@ class BlogApiControllerTest {
         List<Article> articles = blogRepository.findAll();
 
         assertThat(articles).isEmpty();
-    }
+    }                                          
 
     @DisplayName("updateArticle: 블로그 글 수정에 성공한다.")
     @Test
@@ -131,5 +155,5 @@ class BlogApiControllerTest {
 
         assertThat(article.getTitle()).isEqualTo(newTitle);
         assertThat(article.getContent()).isEqualTo(newContent);
-    }
+      
 }

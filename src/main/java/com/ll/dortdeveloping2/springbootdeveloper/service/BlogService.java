@@ -23,6 +23,7 @@ public class BlogService {
         return blogRepository.findAll();
     }
 
+
     public void delete(long id){
         blogRepository.deleteById(id);
     }
@@ -35,5 +36,12 @@ public class BlogService {
         article.update(request.getTitle(), request.getContent());
 
         return article;
+      
+    }
+
+    public Article findById(long id){
+        return blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+    
     }
 }
