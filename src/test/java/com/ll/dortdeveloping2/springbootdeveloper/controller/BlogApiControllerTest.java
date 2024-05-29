@@ -24,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -114,6 +115,10 @@ class BlogApiControllerTest {
         final String content = "content";
 
         Article savedArticle = blogRepository.save(Article.builder()
+                        .title(title)
+                        .content(content)
+                        .build());
+
                                                    
         // when
         mockMvc.perform(delete(url, savedArticle.getId()))
@@ -127,7 +132,7 @@ class BlogApiControllerTest {
 
     @DisplayName("updateArticle: 블로그 글 수정에 성공한다.")
     @Test
-    public void updateArticle() throws Exception{
+    public void updateArticle() throws Exception {
         // given
         final String url = "/api/articles/{id}";
         final String title = "title";
@@ -139,7 +144,7 @@ class BlogApiControllerTest {
                 .build());
 
         final String newTitle = "new title";
-        final String newContent ="new content";
+        final String newContent = "new content";
 
         UpdateArticleRequest request = new UpdateArticleRequest(newTitle, newContent);
 
@@ -155,5 +160,5 @@ class BlogApiControllerTest {
 
         assertThat(article.getTitle()).isEqualTo(newTitle);
         assertThat(article.getContent()).isEqualTo(newContent);
-      
+    }
 }
