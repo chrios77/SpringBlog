@@ -1,11 +1,14 @@
 package com.ll.dortdeveloping2.springbootdeveloper.controller;
 
+import com.ll.dortdeveloping2.springbootdeveloper.domain.Article;
 import com.ll.dortdeveloping2.springbootdeveloper.dto.ArticleListViewResponse;
+import com.ll.dortdeveloping2.springbootdeveloper.dto.ArticleViewResponse;
 import com.ll.dortdeveloping2.springbootdeveloper.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -24,5 +27,14 @@ public class BlogViewController {
         model.addAttribute("articles", articles);
 
         return "articleList";
+    }
+
+    @GetMapping("/articles/{id}")
+    public String getArticle(@PathVariable Long id, Model model){
+
+        Article article = blogService.findById(id);
+        model.addAttribute("article", new ArticleViewResponse(article));
+
+        return "article";
     }
 }
