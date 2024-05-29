@@ -54,7 +54,7 @@ public class BlogApiController {
                 .body(updatedArticle);
     }
     
-    @GetMapping("/api/articles")
+    @GetMapping("/api/articles/{id}")
     public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id){
         Article article = blogService.findById(id);
 
