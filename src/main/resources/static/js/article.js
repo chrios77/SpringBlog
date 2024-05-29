@@ -13,7 +13,7 @@ if(deleteButton){
     });
 }
 
-const modifyButton = document.getgetElementById('modify-btn');
+const modifyButton = document.getElementById('modify-btn');
 
 if(modifyButton){
     modifyButton.addEventListener('click', event => {
@@ -35,4 +35,24 @@ if(modifyButton){
                location.replace(`/articles/${id}`);
             });
         });
+}
+
+const createButton = document.getElementById('create-btn');
+
+if(createButton) {
+    createButton.addEventListener("click", (event) => {
+        fetch("/api/articles", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: document.getElementByID("title").value,
+                content: document.getElementByID("content").value,
+            }),
+        }).then((() => {
+            alert("등록 완료되었습니다.");
+            location.replace("/articles");
+        }))
+    })
 }
