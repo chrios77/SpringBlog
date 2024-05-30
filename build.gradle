@@ -21,8 +21,12 @@ repositories {
     mavenCentral()
 }
 
+// 의존성 추가 파트
 dependencies {
+    // Sprign Batch
     implementation 'org.springframework.boot:spring-boot-starter-batch'
+
+    // Spring Data JDBC
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 
     // SpringBoot JPA
@@ -32,10 +36,10 @@ dependencies {
     // implementation 'org.springframework.boot:spring-boot-starter-security'
 
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Spring Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
 
     // 롬복
     compileOnly 'org.projectlombok:lombok'
@@ -51,8 +55,12 @@ dependencies {
     testImplementation 'org.springframework.batch:spring-batch-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
+    // Spring Boot Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     // 타임리프
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 }
 
 tasks.named('test') {
