@@ -1,7 +1,10 @@
 # BlogService.java 분석
+
 --- 
 
-## Article.java에서 사용한 클래스 레벨 어노테이션
+---
+
+## BlogService.java에서 사용한 클래스 레벨 어노테이션
 
 - @RequiredArgsConstructor 
 - @Service
@@ -26,7 +29,7 @@
 
 ---
 
-## Article.java에서 사용한 메서드 레벨 어노테이션
+## BlogService.java에서 사용한 메서드 레벨 어노테이션
 
 - @Transactional
 
