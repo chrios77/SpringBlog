@@ -76,6 +76,74 @@
 
 ---
 
+## Article.java에서 id 분석
+
+```java
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "id", updatable = false)
+private Long id;
+```
+
+---
+
+## Article.java에서 title 분석
+```
+@Column(name = "title", nullable = false)
+private String title;
+```
+
+---
+
+## Article.java에서 content 분석
+```
+@Column(name = "content", nullable = false)
+private String content;
+```
+
+---
+
+## Article.java에서 createdAt 분석
+```
+@CreatedDate
+@Column(name = "created_at")
+private LocalDateTime createdAt;
+```
+
+---
+
+## Article.java에서 updatedAt 분석
+```
+@LastModifiedDate
+@Column(name = "updated_at")
+private LocalDateTime updatedAt;
+```
+
+---
+
+## Article.java에서 기본 생성자 -> Article 분석
+
+```
+@Builder
+public Article(String title, String content){
+      this.title = title;
+      this.content = content;
+  }
+```
+
+---
+
+## Article.java에서 update 분석
+
+```
+public void update(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
+```
+
+---
+
 > 참고 문헌: 
 > 1. 스프링 부트3 백엔드 개발자 되기 자바편 2판, 신성영 저 
 > 2.
